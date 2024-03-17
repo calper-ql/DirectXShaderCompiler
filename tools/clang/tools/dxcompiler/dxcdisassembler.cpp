@@ -461,22 +461,30 @@ void PrintResourceBinding(DxilResourceBase &res, raw_string_ostream &OS,
                           StringRef comment) {
   OS << comment << " " << left_justify(res.GetGlobalName(), 31);
 
+  OS << "_";
   OS << right_justify(res.GetResClassName(), 10);
 
+  OS << "_";
   PrintResourceFormat(res, 8, OS);
 
+  OS << "_";
   PrintResourceDim(res, 12, OS);
+
+  OS << "_";
 
   std::string ID = res.GetResIDPrefix();
   ID += std::to_string(res.GetID());
   OS << right_justify(ID, 8);
 
+  OS << "_";
   std::string bind = res.GetResBindPrefix();
   bind += std::to_string(res.GetLowerBound());
   if (res.GetSpaceID())
     bind += ",space" + std::to_string(res.GetSpaceID());
 
   OS << right_justify(bind, 15);
+
+  OS << "_";
   if (res.GetRangeSize() != UINT_MAX)
     OS << right_justify(std::to_string(res.GetRangeSize()), 6) << "\n";
   else
